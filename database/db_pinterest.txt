@@ -1,0 +1,93 @@
+CREATE TABLE nguoi_dung(
+	nguoi_dung_id INT AUTO_INCREMENT,
+	email VARCHAR(255),
+	mat_khau VARCHAR(255),
+	ho_ten VARCHAR(255),
+	tuoi INT,
+	anh_dai_dien VARCHAR(255),
+	PRIMARY KEY (nguoi_dung_id)
+)
+
+CREATE TABLE hinh_anh(
+	hinh_id INT AUTO_INCREMENT,
+	ten_hinh VARCHAR(255),
+	duong_dan VARCHAR(255),
+	mo_ta VARCHAR(255),
+	nguoi_dung_id INT,
+	FOREIGN KEY(nguoi_dung_id) REFERENCES nguoi_dung(nguoi_dung_id),
+	PRIMARY KEY (hinh_id)
+)
+
+
+
+CREATE TABLE binh_luan(
+	binh_luan_id INT AUTO_INCREMENT,
+	nguoi_dung_id INT,
+	hinh_id INT,
+	ngay_binh_luan DATETIME,
+	noi_dung VARCHAR(255),
+	FOREIGN KEY (nguoi_dung_id) REFERENCES nguoi_dung(nguoi_dung_id),
+	FOREIGN KEY (hinh_id) REFERENCES hinh_anh(hinh_id),
+	PRIMARY KEY (binh_luan_id)
+)
+
+
+
+CREATE TABLE luu_anh(
+	nguoi_dung_id INT ,
+	hinh_id INT ,
+	ngay_luu DATETIME,
+	FOREIGN KEY(nguoi_dung_id) REFERENCES nguoi_dung(nguoi_dung_id),
+	FOREIGN KEY(hinh_id) REFERENCES hinh_anh(hinh_id),
+	PRIMARY KEY(nguoi_dung_id, hinh_id)
+)
+
+-- Thêm dữ liệu cho table lưu ảnh 
+INSERT INTO luu_anh (nguoi_dung_id, hinh_id, ngay_luu)
+VALUES
+    (1, 1, '2023-12-1 12:00:00'),
+    (2, 2, '2023-12-2 14:30:00'),
+    (3, 3, '2023-12-3 10:45:00'),
+    (4, 4, '2023-12-4 13:00:00'),
+    (4, 5, '2023-12-3 15:30:00'),
+    (3, 6, '2023-12-5 12:10:00'),
+    (2, 7, '2023-12-18 14:50:00'),
+    (1, 8, '2023-12-25 12:01:00'),
+    (1, 2, '2023-12-6 16:30:00'),
+    (2, 4, '2023-12-8 18:00:00'),
+    (3, 2, '2023-12-9 19:30:00'),
+    (4, 8, '2023-12-10 20:00:00');
+
+-- Thêm dữ liệu cho table người dùng 
+INSERT INTO nguoi_dung (email, mat_khau, ho_ten, tuoi, anh_dai_dien) 
+VALUES 
+('user1@example.com', 'password1', 'Người Dùng 1', 25, 'avatar1.jpg'),
+('user2@example.com', 'password2', 'Người Dùng 2', 30, 'avatar2.jpg'),
+('user3@example.com', 'password3', 'Người Dùng 3', 22, 'avatar3.jpg'),
+('user4@example.com', 'password4', 'Người Dùng 4', 28, 'avatar4.jpg')
+
+-- Thêm dữ liệu cho bảng hinh_anh
+INSERT INTO hinh_anh (ten_hinh, duong_dan, mo_ta, nguoi_dung_id) 
+VALUES 
+('Hình 1', 'path/to/image1.jpg', 'Mô tả hình 1', 1),
+('Hình 2', 'path/to/image2.jpg', 'Mô tả hình 2', 2),
+('Hình 3', 'path/to/image3.jpg', 'Mô tả hình 3', 3),
+('Hình 4', 'path/to/image4.jpg', 'Mô tả hình 4', 4),
+('Hình 5', 'path/to/image5.jpg', 'Mô tả hình 5', 1),
+('Hình 6', 'path/to/image6.jpg', 'Mô tả hình 6', 2),
+('Hình 7', 'path/to/image7.jpg', 'Mô tả hình 7', 3),
+('Hình 8', 'path/to/image8.jpg', 'Mô tả hình 8', 4)
+
+-- Thêm dữ liệu cho bảng binh_luan
+INSERT INTO binh_luan (nguoi_dung_id, hinh_id, ngay_binh_luan, noi_dung) 
+VALUES 
+(1, 1, NOW(), 'Bình luận cho hình 1'),
+(2, 2, NOW(), 'Bình luận cho hình 2'),
+(3, 3, NOW(), 'Bình luận cho hình 3'),
+(4, 4, NOW(), 'Bình luận cho hình 4'),
+(1, 5, NOW(), 'Bình luận cho hình 5'),
+(2, 6, NOW(), 'Bình luận cho hình 6'),
+(3, 7, NOW(), 'Bình luận cho hình 7'),
+(4, 8, NOW(), 'Bình luận cho hình 8')
+
+

@@ -1,0 +1,15 @@
+***APIs***
+- POST Sign Up
+- POST Sign In
+- GET Image List
+- GET Image Searching by image_name
+- GET Information of Image and Creator by image_id
+- GET Comment Data by image_id
+- GET Data if the image is saved by image_id (Token)
+- POST to Save User's comment to the Image (Token)
+- GET User Information (Token)
+- GET Saved Image List by user_id (Token)
+- GET Created Image List by user_id (Token)
+- DELETE Delete Image by image_id (Token)
+- POST Upload 1 user's image (Token)
+- PUT User Personal Information (Token)
